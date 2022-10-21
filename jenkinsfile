@@ -1,0 +1,13 @@
+node('OPENJDK-8-MNV') {
+   stage('vcs') {
+   git branch: 'REL_INT_1.0', url: 'https://github.com/abamir/spring-petclinic.git'
+}
+
+stage('build'){
+    sh 'mvn package'
+}
+stage('archive result'){
+    junit '**/surefire-reports/*.xml'
+}
+
+}
